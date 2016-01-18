@@ -4,16 +4,17 @@ app.factory('MoviesService', function ($rootScope, $http, $state, $ionicLoading)
         service.data = {};
         service.data.movies = [
             {
-                "Title": "Inglourious Basterds",
-                "Year": "2009",
-                "imdbID": "tt0361748",
-                "Type": "movie"
+                "title": "The Hateful Eight",
+                "release_date": "2015-12-25",
+                "vote_average": "7.12",
+                "vote_count": "497"
+
             },
             {
-                "Title": "Pulp Fiction",
-                "Year": "1994",
-                "imdbID": "tt0110912",
-                "Type": "movie"
+                "title": "The Revenant",
+                "release_date": "2015-12-25",
+                "vote_average": "7.2",
+                "vote_count": "507"
             },
         ]
     })();
