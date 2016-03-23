@@ -1,15 +1,23 @@
-<ion-view title="Movie list" id="view-movie-list">
-    <ion-content>
-        <div class="bar item-input-inset bar-search">
-            <label class="item-input-wrapper">
-                <i class="icon ion-ios-search"></i>
-                <input type="search" ng-model="searchString" placeholder="Search">
-            </label>
-        </div>
-        <ion-list>
-            <ion-item ng-repeat="movie in data.movies | filter: searchString">
-                {{movie.title}}
-            </ion-item>
-        </ion-list>
-    </ion-content>
+<ion-view title="Movies list" id="view-movies-list">
+	<ion-content>
+		<div class="button-bar">
+			<a class="button button-positive" ng-click="orderByPredicate = 'title'">a ... z</a>
+			<a class="button button-positive" ng-click="orderByPredicate = '-release_date'">newest</a>
+			<a class="button button-positive" ng-click="orderByPredicate = '-vote_average'">top rated</a>
+		</div>
+
+		<div class="item-input-inset">
+			<label class="item-input-wrapper">
+				<i class="ion-search"></i>
+				<input type="search" ng-model="searchString.title" placeholder="search">
+			</label>
+		</div>
+
+		<ion-list>
+			<ion-item ng-repeat="movie in data.movies | filter: searchString | orderBy:orderByPredicate:reverse">
+				{{movie.title}}
+				<ion-option-button class="button-assertive" ng-click="removeMovie(movie.id)">Remove</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
 </ion-view>
