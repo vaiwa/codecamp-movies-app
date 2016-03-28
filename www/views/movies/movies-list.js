@@ -1,4 +1,4 @@
-app.controller('MoviesListCtrl', function($scope, MoviesService, $ionicPopup, $ionicModal) {
+app.controller('MoviesListCtrl', function($scope, MoviesService, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) {
 	$scope.data = MoviesService.data;
 	$scope.removeMovie = function(id) {
 
@@ -28,26 +28,51 @@ app.controller('MoviesListCtrl', function($scope, MoviesService, $ionicPopup, $i
 			vote_count: '0'
 		}
 		$scope.data.movies.push(newMovie);
-		console.log("movies", $scope.data.movies);
+		// console.log('movies', $scope.data.movies);
 
-		$scope.closeModal();
+		$scope.closeAddMovieModal();
 	};
 
 	$ionicModal.fromTemplateUrl('views/movies/add-movie.html', {
 		scope: $scope,
 		animation: 'slide-in-up'
 	}).then(function(modal) {
-		$scope.modal = modal;
+		$scope.addMovieModal = modal;
 	});
-	$scope.openModal = function() {
-		$scope.modal.show();
+	$scope.openAddMovieModal = function() {
+		$scope.addMovieModal.show();
 	};
-	$scope.closeModal = function() {
-		$scope.modal.hide();
+	$scope.closeAddMovieModal = function() {
+		$scope.addMovieModal.hide();
 	};
 	//Cleanup the modal when we're done with it!
 	$scope.$on('$destroy', function() {
-		$scope.modal.remove();
+		$scope.addMovieModal.remove();
+	});
+	// Execute action on hide modal
+	$scope.$on('modal.hidden', function() {
+		// Execute action
+	});
+	// Execute action on remove modal
+	$scope.$on('modal.removed', function() {
+		// Execute action
+	});
+
+	$ionicModal.fromTemplateUrl('views/movies/tutorial.html', {
+		scope: $scope,
+		animation: 'slide-in-up'
+	}).then(function(modal) {
+		$scope.tutorialModal = modal;
+	});
+	$scope.openTutorialModal = function() {
+		$scope.tutorialModal.show();
+	};
+	$scope.closeModal = function() {
+		$scope.tutorialModal.hide();
+	};
+	//Cleanup the modal when we're done with it!
+	$scope.$on('$destroy', function() {
+		$scope.tutorialModal.remove();
 	});
 	// Execute action on hide modal
 	$scope.$on('modal.hidden', function() {
