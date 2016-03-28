@@ -4,7 +4,7 @@ app
 		$scope.debugMode = APP_CONFIG.debugMode;
 		$scope.applicationStatus = null;
 
-		$scope.$on("applicationStatus", function (event, applicationStatus) {
+		$scope.$on('applicationStatus', function (event, applicationStatus) {
 			$scope.applicationStatus = applicationStatus;
 		});
 
@@ -17,8 +17,8 @@ app
 		 * @param {function} alert callback
 		 */
 		$rootScope.showAlert = function (text, title, button, callback) {
-			if (button == null) button = "Zavřít";
-			if (title == null) title = "Oznámení";
+			if (button == null) button = 'Zavřít';
+			if (title == null) title = 'Oznámení';
 
 			if (navigator.notification) {
 				navigator.notification.alert(text, callback, title, button);
