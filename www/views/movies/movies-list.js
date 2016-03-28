@@ -67,7 +67,7 @@ app.controller('MoviesListCtrl', function($scope, MoviesService, $ionicPopup, $i
 	$scope.openTutorialModal = function() {
 		$scope.tutorialModal.show();
 	};
-	$scope.closeModal = function() {
+	$scope.closeTutorialModal = function() {
 		$scope.tutorialModal.hide();
 	};
 	//Cleanup the modal when we're done with it!
@@ -82,6 +82,10 @@ app.controller('MoviesListCtrl', function($scope, MoviesService, $ionicPopup, $i
 	$scope.$on('modal.removed', function() {
 		// Execute action
 	});
+
+	$scope.tutorialSlide = function() {
+		$ionicSlideBoxDelegate.next();
+	}
 
 
 });
