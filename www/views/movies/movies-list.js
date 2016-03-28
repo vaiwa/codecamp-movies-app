@@ -83,8 +83,8 @@ app.controller('MoviesListCtrl', function($scope, MoviesService, $ionicPopup, $i
 		// Execute action
 	});
 
-	$scope.tutorialSlide = function() {
-		$ionicSlideBoxDelegate.next();
+	$scope.tutorialSlide = function(index) {
+		$ionicSlideBoxDelegate.slide(index, 100);
 	}
 
 
