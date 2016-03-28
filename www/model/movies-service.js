@@ -25,7 +25,7 @@ app.factory('MoviesService', function() {
 				vote_count: '297'
 			},
 			{
-				id: 3,
+				id: 4,
 				title: 'nejnovejsi',
 				release_date: '2016-01-25',
 				vote_average: '5.12',

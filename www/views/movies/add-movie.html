@@ -1,9 +1,22 @@
 <ion-modal-view>
-	<ion-header-bar>
-		<h1 class="title">My Modal title</h1>
+	<ion-header-bar class="bar-positive">
+		<h1 class="title">Add movie</h1>
 		<button class="button button-icon right ion-close" ng-click="closeModal()"></button>
 	</ion-header-bar>
+
 	<ion-content>
-		Hello!
+		<form name="movie" novalidate="" ng-submit="addMovie(movie)">
+			<ion-list>
+				<label class="item item-input">
+					<span class="input-label">title</span>
+					<input type="text" ng-model="movie.title">
+				</label>
+				<label class="item item-input">
+					<span class="input-label">release date</span>
+					<input type="date" ng-model="movie.release_date">
+				</label>
+				<input type="submit" id="addMovieSubmit" text="submit" class="button button-block button-positive"/>
+			</ion-list>
+		</form>
 	</ion-content>
 </ion-modal-view>
