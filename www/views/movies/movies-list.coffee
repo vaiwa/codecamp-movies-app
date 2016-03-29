@@ -7,12 +7,9 @@ app.controller 'MoviesListCtrl', ($scope, MoviesService, GlobalService, $ionicPo
 			title: 'Consume Ice Cream'
 			template: 'Are you sure you want to eat this ice cream?'
 
-
 		confirmPopup.then (res) ->
-			if res
-				MoviesService.removeMovie id
-			else
-				console.log 'You are not sure'
+			return MoviesService.removeMovie id if res
+			console.log 'You are not sure'
 
 	$scope.addMovie = (form) ->
 		movies = $scope.data.movies
