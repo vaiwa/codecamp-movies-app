@@ -1,5 +1,28 @@
-<ion-view hide-nav-bar="false" hide-back-button="false" title="Home" id="view-home">
+<ion-view title="{{movie.title}}" id="view-movies-detail">
 	<ion-content>
-		<p>Hello world!</p>
+		<span ng-if="movie.backdrop_path">
+			<img src="http://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
+		</span>
+
+		<button ng-click="toggleWatched(movie.id)" class="button button-block" ng-class="{
+			'button-positive': !isMovieWatched(),
+			'button-assertive': isMovieWatched()}">
+			<span ng-if="!isMovieWatched()">Mark as watched</span>
+			<span ng-if="isMovieWatched()">Unmark as watched</span>
+		</button>
+
+		<ul class="list">
+			<li class="item">
+				<strong>Release date:</strong>
+				{{movie.release_date | date: 'yyyy'}}
+			</li>
+			<li class="item">
+				<strong>Rating:</strong>
+				{{movie.vote_average}} ({{movie.vote_count}}x)
+			</li>
+			<li class="item item-body">
+				<p>{{movie.overview}}</p>
+			</li>
+		</ul>
 	</ion-content>
 </ion-view>

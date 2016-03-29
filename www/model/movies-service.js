@@ -2,38 +2,8 @@ app.factory('MoviesService', function ($http, APP_CONFIG) {
 	return new (function () { // kvuli odstineni
 		var service = this;
 		service.data = {};
-		// service.data.movies = [
-		// 	{
-		// 		id: 1,
-		// 		title: 'top rated',
-		// 		release_date: '2015-12-25',
-		// 		vote_average: '7.12',
-		// 		vote_count: '497'
-		// 	},
-		// 	{
-		// 		id: 2,
-		// 		title: 'az film',
-		// 		release_date: '2015-11-25',
-		// 		vote_average: '4.12',
-		// 		vote_count: '297'
-		// 	},
-		// 	{
-		// 		id: 3,
-		// 		title: 'movie',
-		// 		release_date: '2014-11-25',
-		// 		vote_average: '5.12',
-		// 		vote_count: '297'
-		// 	},
-		// 	{
-		// 		id: 4,
-		// 		title: 'nejnovejsi',
-		// 		release_date: '2016-01-25',
-		// 		vote_average: '5.12',
-		// 		vote_count: '297'
-		// 	}
-		// ]
 
-		service.getMovies = function () {
+		service.getMovies = function (cb) {
 			var req = {
 				method: 'GET',
 				url: APP_CONFIG.getApiUrl('moviesPopular')
@@ -42,12 +12,50 @@ app.factory('MoviesService', function ($http, APP_CONFIG) {
 			.success(function (response) {
 				console.log(response);
 				service.data.movies = response.results;
+
+				if (cb) cb();
 			})
 			.error(function (data, status, headers, config) {
 				console.error('error');
 			});
 		}
-		service.getMovies();
+
+		service.getMovieById = function (id) {
+			var result = {}
+			angular.forEach(service.data.movies, function (movie) {
+				if(movie.id == id) result = movie;
+			})
+			return result;
+		};
+
+		service.watchedMovies = []
+		service.getWatchedMoviesFromStorage = function () {
+			try {
+				service.watchedMovies = JSON.parse(localStorage.getItem('watched_movies')) || [];
+			} catch (e) {
+				console.warn('bad json', e);
+			}
+			return service.watchedMovies;
+		};
+
+		service.toggleWatched = function (id) {
+			var occurenceIndex = service.watchedMovies.indexOf(id);
+			if (~occurenceIndex) {
+				service.watchedMovies.splice(occurenceIndex, 1);
+			} else {
+				service.watchedMovies.push(+id);
+			}
+			localStorage.setItem('watched_movies', JSON.stringify(service.watchedMovies));
+		};
+
+		service.isMovieWatched = function (movieId) {
+			return !!~service.watchedMovies.indexOf(movieId);
+		};
+
+
+		service.getMovies(function () {
+			service.getWatchedMoviesFromStorage();
+		});
 
 		service.removeMovie = function (id) {
 			angular.forEach(service.data.movies, function (movie, index) {
