@@ -1,4 +1,5 @@
-app.controller 'MoviesListCtrl', ($scope, MoviesService, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) ->
+app.controller 'MoviesListCtrl', ($scope, MoviesService, GlobalService, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) ->
+
 	$scope.data = MoviesService.data
 	$scope.removeMovie = (id) ->
 

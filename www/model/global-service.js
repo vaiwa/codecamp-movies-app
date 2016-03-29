@@ -142,5 +142,5 @@ app.factory('GlobalService', function ($http, $ionicPopup, APP_CONFIG) {
 		this.removeStorageItem = function (key) {
 			return localStorage.removeItem(APP_CONFIG.storagePrefix + key);
 		};
-    })();
+	})();
 });
