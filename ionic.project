@@ -1,6 +1,6 @@
 {
-  "name": "H2 Jan Navrat",
-  "app_id": "",
+  "name": "H3 Jan Navrat",
+  "app_id": "49bfe3af",
   "gulpStartupTasks": [
     "sass",
     "scripts",
