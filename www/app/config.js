@@ -7,7 +7,7 @@ app.constant("APP_CONFIG", {
 	apiKey: "4aa883f95999ec813b8bfaf319f3972b",
 	apiUrl: "api.themoviedb.org/3/",
 	apiEndpoints: {
-		exampleApiEndpoint: "movies/popular",
+		moviesPopular: "movie/popular",
 	},
 
 	getApiUrl: function (endpoint){
