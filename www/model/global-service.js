@@ -1,5 +1,5 @@
 app.factory('GlobalService', function ($http, $ionicPopup, APP_CONFIG) {
-    return new (function () {
+	return new (function () {
 		var self = this;
 		this.promises = [];
 		this.data = {};

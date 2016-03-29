@@ -1,0 +1,68 @@
+app.factory 'MoviesService', ($http, APP_CONFIG) ->
+	return new (-> () {
+		service = this;
+		service.data = {};
+
+		service.getMovies = -> (cb) {
+			req = {
+				method: 'GET',
+				url: APP_CONFIG.getApiUrl('moviesPopular')
+			}
+			$http(req)
+			.success(-> (response) {
+				console.log(response);
+				service.data.movies = response.results;
+
+				if (cb) cb();
+			})
+			.error(-> (data, status, headers, config) {
+				console.error('error');
+			});
+		}
+
+		service.getMovieById = -> (id) {
+			result = {}
+			angular.forEach(service.data.movies, -> (movie) {
+				if(movie.id == id) result = movie;
+			})
+			return result;
+		};
+
+		service.watchedMovies = []
+		service.getWatchedMoviesFromStorage = -> () {
+			try {
+				service.watchedMovies = JSON.parse(localStorage.getItem('watched_movies')) || [];
+			} catch (e) {
+				console.warn('bad json', e);
+			}
+			return service.watchedMovies;
+		};
+
+		service.toggleWatched = -> (id) {
+			occurenceIndex = service.watchedMovies.indexOf(id);
+			if (~occurenceIndex) {
+				service.watchedMovies.splice(occurenceIndex, 1);
+			} else {
+				service.watchedMovies.push(+id);
+			}
+			localStorage.setItem('watched_movies', JSON.stringify(service.watchedMovies));
+		};
+
+		service.isMovieWatched = -> (movieId) {
+			return !!~service.watchedMovies.indexOf(movieId);
+		};
+
+
+		service.getMovies(-> () {
+			service.getWatchedMoviesFromStorage();
+		});
+
+		service.removeMovie = -> (id) {
+			angular.forEach(service.data.movies, -> (movie, index) {
+				if (movie.id === id) {
+					service.data.movies.splice(index, 1);
+				}
+			});
+		}
+
+	})();
