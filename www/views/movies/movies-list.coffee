@@ -4,8 +4,8 @@ app.controller 'MoviesListCtrl', ($scope, MoviesService, GlobalService, $ionicPo
 	$scope.removeMovie = (id) ->
 
 		confirmPopup = $ionicPopup.confirm
-			title: 'Consume Ice Cream'
-			template: 'Are you sure you want to eat this ice cream?'
+			title: 'Remove'
+			template: 'Are you sure you want to remove this movie?'
 
 		confirmPopup.then (res) ->
 			return MoviesService.removeMovie id if res
@@ -18,7 +18,7 @@ app.controller 'MoviesListCtrl', ($scope, MoviesService, GlobalService, $ionicPo
 		newMovie =
 			id: newId
 			title: form.title
-			release_date: form.release_date # moment.js needed TODO
+			release_date: moment(form.release_date).format 'YYYY-MM-DD'
 			vote_average: '0'
 			vote_count: '0'
 		$scope.data.movies.push newMovie
@@ -27,9 +27,7 @@ app.controller 'MoviesListCtrl', ($scope, MoviesService, GlobalService, $ionicPo
 	$ionicModal.fromTemplateUrl 'views/movies/add-movie.html',
 		scope: $scope
 		animation: 'slide-in-up'
-	.then (modal) ->
-		$scope.addMovieModal = modal
-
+	.then (modal) -> $scope.addMovieModal = modal
 	$scope.openAddMovieModal = -> $scope.addMovieModal.show()
 	$scope.closeAddMovieModal = -> $scope.addMovieModal.hide()
 	$scope.$on '$destroy', -> $scope.addMovieModal.remove() # Cleanup the modal when we're done with it!
@@ -43,5 +41,3 @@ app.controller 'MoviesListCtrl', ($scope, MoviesService, GlobalService, $ionicPo
 	$scope.$on '$destroy', -> $scope.tutorialModal.remove() # Cleanup the modal when we're done with it!
 
 	$scope.tutorialSlide = (index) -> $ionicSlideBoxDelegate.slide index, 100
-
-

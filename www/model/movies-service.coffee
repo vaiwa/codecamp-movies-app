@@ -1,13 +1,15 @@
 app.factory 'MoviesService', ($http, APP_CONFIG) ->
-
 	service = @
 	service.data = {}
+
+	# console.log 'TODO'
+	# console.log 'lodash', _.first [1,2,3]
+	# console.log ''
 
 	service.getMovies = (cb) ->
 		req = method: 'GET', url: APP_CONFIG.getApiUrl 'moviesPopular'
 		$http req
 		.success (response) ->
-			console.log response
 			service.data.movies = response.results
 			cb() if cb
 		.error (data, status, headers, config) -> console.error 'error'
@@ -44,5 +46,3 @@ app.factory 'MoviesService', ($http, APP_CONFIG) ->
 			service.data.movies.splice index, 1 if movie.id is id
 
 	service
-
-

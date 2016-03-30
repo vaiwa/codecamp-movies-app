@@ -1,12 +1,13 @@
 {
-  "name": "Your app name",
+  "name": "H4 Jan Navrat",
   "private": "true",
   "dependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0",
     "moment": "~2.10.3",
     "moment-timezone": "~0.4.0",
     "ngCordova": "~0.1.17-alpha",
-    "angular-resource": "~1.4.5"
+    "angular-resource": "~1.4.5",
+    "lodash": "~4.6.1"
   },
   "resolutions": {
     "ionic": "1.0.0",

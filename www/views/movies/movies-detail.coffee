@@ -5,4 +5,3 @@ app.controller 'MoviesDetailCtrl', ($scope, MoviesService, $stateParams) ->
 
 	$scope.isMovieWatched = -> MoviesService.isMovieWatched(movieId)
 	$scope.toggleWatched = -> MoviesService.toggleWatched(movieId)
-
