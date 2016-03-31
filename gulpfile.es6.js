@@ -44,7 +44,7 @@ var coffeeExts = '.coffee'
 var ES6appFiles = []
 var coffeeFiles = []
 
-var appFiles = ['www/views/**/*', 'www/model/**/*', 'www/app/**/*']
+var appFiles = ['www/views/**/*', 'www/model/**/*', 'www/app/**/*', 'www/filters/**/*', 'www/locales/**/*']
 appFiles.forEach(item => {
 	ES6appFiles.push(item + es6Exts)
 	coffeeFiles.push(item + coffeeExts)

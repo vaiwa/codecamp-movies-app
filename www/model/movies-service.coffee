@@ -29,14 +29,13 @@ app.factory 'MoviesService', ($http, APP_CONFIG) ->
 		service.watchedMovies
 
 	service.toggleWatched = (id) ->
-		occurenceIndex = service.watchedMovies.indexOf id
-		if ~occurenceIndex
-			service.watchedMovies.splice occurenceIndex, 1
+		if id in service.watchedMovies
+			service.watchedMovies = _.without service.watchedMovies, id
 		else
 			service.watchedMovies.push +id
 		localStorage.setItem 'watched_movies', JSON.stringify service.watchedMovies
 
-	service.isMovieWatched = (movieId) -> !!~service.watchedMovies.indexOf movieId
+	service.isMovieWatched = (movieId) -> movieId in service.watchedMovies
 
 
 	service.getMovies -> service.getWatchedMoviesFromStorage()
