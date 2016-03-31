@@ -2,9 +2,9 @@ consoleLog = [];
 angular.module('preInit', []).run(function($provide, APP_CONFIG) {
 
 
-    /**
-     * @description Map for remove diacritics
-     */
+	/**
+	 * @description Map for remove diacritics
+	 */
 	$provide.value('defaultDiacriticsRemovalMap', [
 		{'base':'A', 'letters':'\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F'},
 		{'base':'AA','letters':'\uA732'},
@@ -104,9 +104,9 @@ angular.module('preInit', []).run(function($provide, APP_CONFIG) {
 	}
 
 
-    /**
-     * @description Method for remove diacritics
-     */
+	/**
+	 * @description Method for remove diacritics
+	 */
 	$provide.value('removeDiacritics', function (str) {
 		if(str == "") return str;
 		return str.replace(/[^\u0000-\u007E]/g, function(a){
@@ -115,78 +115,78 @@ angular.module('preInit', []).run(function($provide, APP_CONFIG) {
 	});
 
 
-    /**
-     * @description Tell whether the app is currently run on mobile device
-     * @return {Boolean} is the app run on device
-     */
-    $provide.value('isDevice', function (str) {
-        if ((ionic.Platform.isIPad() || ionic.Platform.isIOS() || ionic.Platform.isAndroid()) ){
-            return true;
-        }else{
-            return false;
-        }
-    });
+	/**
+	 * @description Tell whether the app is currently run on mobile device
+	 * @return {Boolean} is the app run on device
+	 */
+	$provide.value('isDevice', function (str) {
+		if ((ionic.Platform.isIPad() || ionic.Platform.isIOS() || ionic.Platform.isAndroid()) ){
+			return true;
+		}else{
+			return false;
+		}
+	});
 
 
-    /**
-     * @description Returns size of object
-     */
-    Object.size = function(obj) {
-        var size = 0, key;
-        for (key in obj) {
-            if (obj.hasOwnProperty(key)) size++;
-        }
-        return size;
-    };
+	/**
+	 * @description Returns size of object
+	 */
+	Object.size = function(obj) {
+		var size = 0, key;
+		for (key in obj) {
+			if (obj.hasOwnProperty(key)) size++;
+		}
+		return size;
+	};
 
 
-    /**
-     * @description Returns true if object is empty
-     */
-    Object.isEmpty = function (obj) {
-        for (var prop in obj) {
-            if (obj.hasOwnProperty(prop))
-                return false;
-        }
-        return true;
-    };
+	/**
+	 * @description Returns true if object is empty
+	 */
+	Object.isEmpty = function (obj) {
+		for (var prop in obj) {
+			if (obj.hasOwnProperty(prop))
+				return false;
+		}
+		return true;
+	};
 
 
-    /**
-     * @description Console log which is visible only in debug mode.
-     */
-    console.debug = function(){
-        var args = Array.prototype.slice.call(arguments);
-        if(APP_CONFIG.debugMode) {
-            var status = "string"
-            angular.forEach(args, function(item, key){
-                if(typeof item != "string") status = "object"
-            })
-            if(status == "object")
-                console.info("  ", args);
-            else
-                console.info("%c  " + args, "color: gray");
-        }
-    }
+	/**
+	 * @description Console log which is visible only in debug mode.
+	 */
+	console.debug = function(){
+		var args = Array.prototype.slice.call(arguments);
+		if(APP_CONFIG.debugMode) {
+			var status = "string"
+			angular.forEach(args, function(item, key){
+				if(typeof item != "string") status = "object"
+			})
+			if(status == "object")
+				console.info("  ", args);
+			else
+				console.info("%c  " + args, "color: gray");
+		}
+	}
 
 
-    /**
-     * @description Debounce is for calling function maximally one time per specified interval
-     */
-    $provide.value('debounce', function (func, wait, immediate) {
-        var timeout;
-        return function() {
-            var context = this, args = arguments;
-            var later = function() {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-            };
-            var callNow = immediate && !timeout;
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-            if (callNow) func.apply(context, args);
-        };
-    });
+	/**
+	 * @description Debounce is for calling function maximally one time per specified interval
+	 */
+	$provide.value('debounce', function (func, wait, immediate) {
+		var timeout;
+		return function() {
+			var context = this, args = arguments;
+			var later = function() {
+				timeout = null;
+				if (!immediate) func.apply(context, args);
+			};
+			var callNow = immediate && !timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+			if (callNow) func.apply(context, args);
+		};
+	});
 
 
 	if (APP_CONFIG.debugMode == true) {
