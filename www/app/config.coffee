@@ -10,4 +10,7 @@ app.constant 'APP_CONFIG',
 	apiEndpoints:
 		moviesPopular: 'movie/popular'
 
-	getApiUrl: (endpoint) -> "http://#{this.apiUrl}#{this.apiEndpoints[endpoint]}?api_key=#{this.apiKey}"
+	getApiUrl: (endpoint, params) ->
+		url = "http://#{this.apiUrl}#{this.apiEndpoints[endpoint]}?api_key=#{this.apiKey}"
+		url += "&#{key}=#{value}" for key, value of params or {}
+		url

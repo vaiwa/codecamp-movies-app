@@ -1,16 +1,13 @@
 app.factory 'MoviesService', ($http, APP_CONFIG) ->
 	service = @
-	service.data = {}
+	service.data = movies: []
+	service.page = 1
 
-	# console.log 'TODO'
-	# console.log 'lodash', _.first [1,2,3]
-	# console.log ''
-
-	service.getMovies = (cb) ->
-		req = method: 'GET', url: APP_CONFIG.getApiUrl 'moviesPopular'
+	service.getMovies = (page, cb) ->
+		req = method: 'GET', url: APP_CONFIG.getApiUrl 'moviesPopular', {page}
 		$http req
 		.success (response) ->
-			service.data.movies = response.results
+			service.data.movies = service.data.movies.concat response.results
 			cb() if cb
 		.error (data, status, headers, config) -> console.error 'error'
 
@@ -38,7 +35,13 @@ app.factory 'MoviesService', ($http, APP_CONFIG) ->
 	service.isMovieWatched = (movieId) -> movieId in service.watchedMovies
 
 
-	service.getMovies -> service.getWatchedMoviesFromStorage()
+	service.getMovies service.page, -> service.getWatchedMoviesFromStorage()
+
+	service.loadMore = (cb) ->
+		service.page += 1
+		service.getMovies service.page, ->
+			service.getWatchedMoviesFromStorage()
+			cb()
 
 	service.removeMovie = (id) ->
 		for movie, index in service.data.movies or []
