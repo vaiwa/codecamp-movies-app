@@ -14,3 +14,6 @@ app.constant 'APP_CONFIG',
 		url = "http://#{this.apiUrl}#{this.apiEndpoints[endpoint]}?api_key=#{this.apiKey}"
 		url += "&#{key}=#{value}" for key, value of params or {}
 		url
+
+	getMovieCreditsUrl: (movieId) -> "http://#{this.apiUrl}movie/#{movieId}/credits?api_key=#{this.apiKey}"
+

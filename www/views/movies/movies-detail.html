@@ -1,7 +1,7 @@
 <ion-view title="{{movie.title}}" id="view-movies-detail">
 	<ion-content>
 
-		<button class="button button-icon ion-help-circled" ui-sref="movies-list()"></button>
+		<button class="button button-icon ion-close"></button>
 
 		<span ng-if="movie.backdrop_path">
 			<img src="http://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
@@ -27,5 +27,16 @@
 				<p>{{movie.overview}}</p>
 			</li>
 		</ul>
+
+		<span ng-if="!credits">
+			<ion-spinner></ion-spinner>
+		</span>
+		<span ng-if="credits">
+			<ul class="list">
+				<li class="item"><strong>Cast:</strong></li>
+				<li class="item" ng-repeat="cast in credits.cast">{{cast.name}}</li>
+			</ul>
+		</span>
+
 	</ion-content>
 </ion-view>

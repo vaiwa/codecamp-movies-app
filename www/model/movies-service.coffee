@@ -17,6 +17,11 @@ app.factory 'MoviesService', ($http, APP_CONFIG) ->
 			result = movie if movie.id is id
 		result
 
+	service.getMovieCredits = (id, done) ->
+		$http method: 'GET', url: APP_CONFIG.getMovieCreditsUrl id
+		.success (response) -> done null, response
+		.error (data, status, headers, config) -> done 'MovieCreditsError'
+
 	service.watchedMovies = []
 	service.getWatchedMoviesFromStorage = ->
 		try
