@@ -2,6 +2,7 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 	service = @
 	service.data = {}
 	service.page = 1
+	service.watchedMovies = []
 
 	service.getMovies = (page, cb) ->
 		url = APP_CONFIG.getApiUrl 'moviesPopular', {page}
@@ -10,7 +11,6 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 			service.data.movies ?= []
 			service.data.movies = service.data.movies.concat res.results
 			cb() if cb
-
 
 	service.getMovieById = (id) ->
 		result = {}
@@ -23,7 +23,6 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 		$resource url
 		.get (res) -> done null, res
 
-	service.watchedMovies = []
 	service.getWatchedMoviesFromStorage = ->
 		try
 			service.watchedMovies = JSON.parse(localStorage.getItem 'watched_movies') or []
@@ -40,9 +39,6 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 
 	service.isMovieWatched = (movieId) -> movieId in service.watchedMovies
 
-
-	service.getMovies service.page, -> service.getWatchedMoviesFromStorage()
-
 	service.loadMore = (cb) ->
 		service.page += 1
 		service.getMovies service.page, ->
@@ -53,4 +49,6 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 		for movie, index in service.data.movies or []
 			service.data.movies.splice index, 1 if movie.id is id
 
+
+	service.getMovies service.page, -> service.getWatchedMoviesFromStorage()
 	service
