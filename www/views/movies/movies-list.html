@@ -24,7 +24,7 @@
 		</div>
 
 		<ion-list>
-			<ion-item ng-repeat="movie in data.movies | filter: searchString | orderBy:orderByPredicate:reverse" class="item-avatar-left" ui-sref="movies-detail({'id': movie.id})">
+			<ion-item ng-repeat="movie in data.movies | filter: searchString | orderBy: orderByPredicate: reverse" class="item-avatar-left" ui-sref="movies-detail({'id': movie.id})">
 				<img src="http://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" class="fit-thumbnail" />
 				<h2>{{movie.title}}</h2>
 				<p>{{movie.vote_average}} / 10</p>

@@ -1,12 +1,13 @@
 app.factory 'MoviesService', ($http, APP_CONFIG) ->
 	service = @
-	service.data = movies: []
+	service.data = {}
 	service.page = 1
 
 	service.getMovies = (page, cb) ->
 		req = method: 'GET', url: APP_CONFIG.getApiUrl 'moviesPopular', {page}
 		$http req
 		.success (response) ->
+			service.data.movies ?= []
 			service.data.movies = service.data.movies.concat response.results
 			cb() if cb
 		.error (data, status, headers, config) -> console.error 'error'
