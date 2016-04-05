@@ -1,7 +1,7 @@
 app.constant 'APP_CONFIG',
 
 	#Basic config
-	debugMode: true
+	debugMode: yes
 	storagePrefix: 'test_'
 
 	# API config
