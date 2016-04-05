@@ -5,7 +5,7 @@
 	<ion-content overflow-scroll="true">
 
 		<span ng-if="movie.backdrop_path">
-			<img src="http://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
+			<img ng-src="http://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
 		</span>
 
 		<button ng-click="toggleWatched(movie.id)" class="button button-block" ng-class="{
