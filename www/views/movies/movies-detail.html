@@ -1,5 +1,5 @@
 <ion-view title="{{movie.title}}" id="view-movies-detail">
-	<ion-content>
+	<ion-content overflow-scroll="true">
 
 		<span ng-if="movie.backdrop_path">
 			<img src="http://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
@@ -15,14 +15,14 @@
 		<ul class="list">
 			<li class="item">
 				<strong>Release date:</strong>
-				{{movie.release_date | date: 'yyyy'}}
+				{{::movie.release_date | date: 'yyyy'}}
 			</li>
 			<li class="item">
 				<strong>Rating:</strong>
-				{{movie.vote_average}} ({{movie.vote_count}}x)
+				{{::movie.vote_average}} ({{::movie.vote_count}}x)
 			</li>
 			<li class="item item-body">
-				<p>{{movie.overview}}</p>
+				<p>{{::movie.overview}}</p>
 			</li>
 		</ul>
 
@@ -32,7 +32,7 @@
 		<span ng-if="credits">
 			<ul class="list">
 				<li class="item"><strong>Cast:</strong></li>
-				<li class="item" ng-repeat="cast in credits.cast">{{cast.name}}</li>
+				<li class="item" ng-repeat="cast in credits.cast track by cast.id">{{::cast.name}}</li>
 			</ul>
 		</span>
 

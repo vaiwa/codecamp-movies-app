@@ -9,7 +9,7 @@
 		<ion-nav-back-button class="button-clear button-icon"></ion-nav-back-button>
 	</ion-nav-bar>
 
-	<ion-content>
+	<ion-content overflow-scroll="true">
 		<div class="button-bar">
 			<a class="button button-positive" ng-click="orderByPredicate = 'title'">a ... z</a>
 			<a class="button button-positive" ng-click="orderByPredicate = '-release_date'">newest</a>
@@ -24,10 +24,10 @@
 		</div>
 
 		<ion-list>
-			<ion-item ng-repeat="movie in data.movies | filter: searchString | orderBy: orderByPredicate: reverse" class="item-avatar-left" ui-sref="movies-detail({'id': movie.id})">
-				<img src="http://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" class="fit-thumbnail" />
-				<h2>{{movie.title}}</h2>
-				<p>{{movie.vote_average}} / 10</p>
+			<ion-item ng-repeat="movie in data.movies track by movie.id | filter: searchString | orderBy: orderByPredicate: reverse" class="item-avatar-left" ui-sref="movies-detail({'id': movie.id})">
+				<img src="http://image.tmdb.org/t/p/w500/{{::movie.backdrop_path}}" class="fit-thumbnail" />
+				<h2>{{::movie.title}}</h2>
+				<p>{{::movie.vote_average}} / 10</p>
 				<ion-option-button class="button-assertive" ng-click="removeMovie(movie.id)">Remove</ion-option-button>
 			</ion-item>
 

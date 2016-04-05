@@ -1,16 +1,16 @@
-app.factory 'MoviesService', ($http, APP_CONFIG) ->
+app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 	service = @
 	service.data = {}
 	service.page = 1
 
 	service.getMovies = (page, cb) ->
-		req = method: 'GET', url: APP_CONFIG.getApiUrl 'moviesPopular', {page}
-		$http req
-		.success (response) ->
+		url = APP_CONFIG.getApiUrl 'moviesPopular', {page}
+		$resource url, {}, query: isArray: no
+		.query (res) ->
 			service.data.movies ?= []
-			service.data.movies = service.data.movies.concat response.results
+			service.data.movies = service.data.movies.concat res.results
 			cb() if cb
-		.error (data, status, headers, config) -> console.error 'error'
+
 
 	service.getMovieById = (id) ->
 		result = {}
@@ -19,9 +19,9 @@ app.factory 'MoviesService', ($http, APP_CONFIG) ->
 		result
 
 	service.getMovieCredits = (id, done) ->
-		$http method: 'GET', url: APP_CONFIG.getMovieCreditsUrl id
-		.success (response) -> done null, response
-		.error (data, status, headers, config) -> done 'MovieCreditsError'
+		url = APP_CONFIG.getMovieCreditsUrl id
+		$resource url
+		.get (res) -> done null, res
 
 	service.watchedMovies = []
 	service.getWatchedMoviesFromStorage = ->
