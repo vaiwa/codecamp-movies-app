@@ -29,6 +29,14 @@
 			</li>
 		</ul>
 
+		<span ng-if="countries">
+			<ul class="list">
+				<li class="item"><strong>Countries:</strong></li>
+				<li class="item" ng-repeat="country in countries track by country.name">{{::country.name}}</li>
+			</ul>
+			<div id="regions_div" style="width: 900px; height: 500px;"></div>
+		</span>
+
 		<span ng-if="!credits">
 			<ion-spinner></ion-spinner>
 		</span>

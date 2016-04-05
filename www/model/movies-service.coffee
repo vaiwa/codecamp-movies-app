@@ -23,6 +23,11 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 		$resource url
 		.get (res) -> done null, res
 
+	service.getMovieInfo = (id, done) ->
+		url = APP_CONFIG.getMovieIdUrl id
+		$resource url
+		.get (res) -> done null, res
+
 	service.getWatchedMoviesFromStorage = ->
 		try
 			service.watchedMovies = JSON.parse(localStorage.getItem 'watched_movies') or []
