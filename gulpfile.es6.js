@@ -20,7 +20,8 @@ var bowerLibs = {
 		'ngCordova/dist/ng-cordova.min.js',
 		'moment/min/moment.min.js',
 		'moment-timezone/builds/moment-timezone.min.js',
-		'lodash/dist/lodash.js'
+		'lodash/dist/lodash.js',
+		'ga-localstorage/GALocalStorage.js'
 	],
 	css: [],
 	fonts: [

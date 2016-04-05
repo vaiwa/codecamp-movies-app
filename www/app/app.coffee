@@ -12,6 +12,9 @@
 
 		# DEVICE READY
 		$ionicPlatform.ready ($cordovaGlobalization) ->
+
+			ga_storage._setAccount 'UA-40782540-6'
+
 			setTimeout ->
 				navigator.splashscreen and navigator.splashscreen.hide()
 			, 100

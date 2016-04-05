@@ -11,6 +11,8 @@ app.controller 'MoviesListCtrl', ($scope, MoviesService, GlobalService, $ionicPo
 			return MoviesService.removeMovie id if res
 			console.log 'You are not sure'
 
+	$scope.$on '$ionicView.enter', -> ga_storage._trackPageview '/movies/list', 'List'
+
 	$scope.addMovie = (form) ->
 		movies = $scope.data.movies
 		lastMovie = movies[movies.length - 1]
