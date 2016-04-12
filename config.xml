@@ -6,8 +6,6 @@
     <content src="index.html"/>
     <allow-navigation href="http://*/*"/>
     <allow-navigation href="https://*/*"/>
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
     <access origin="*"/>
     <access origin="tel:*" launch-external="yes"/>
     <access origin="geo:*" launch-external="yes"/>
