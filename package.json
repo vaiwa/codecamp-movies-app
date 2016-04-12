@@ -38,7 +38,9 @@
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard",
     "cordova-plugin-dialogs",
-    "cordova-plugin-camera"
+    "cordova-plugin-camera",
+    "cordova-plugin-x-socialsharing",
+    "cordova-plugin-contacts"
   ],
   "cordovaPlatforms": []
 }
