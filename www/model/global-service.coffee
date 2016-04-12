@@ -1,4 +1,5 @@
-app.factory 'GlobalService', ($http, $ionicPopup, APP_CONFIG) ->
+
+app.factory 'GlobalService', ($http, $ionicPopup, APP_CONFIG, $ionicLoading) ->
 	self = @
 	@.promises = []
 	@.data = {}
@@ -92,3 +93,5 @@ app.factory 'GlobalService', ($http, $ionicPopup, APP_CONFIG) ->
 	@param {String} Key to search for
 	###
 	@.removeStorageItem = (key) -> localStorage.removeItem APP_CONFIG.storagePrefix + key
+
+	self

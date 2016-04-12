@@ -15,6 +15,14 @@
 			<span ng-if="isMovieWatched()">Unmark as watched</span>
 		</button>
 
+		<div class="item item-divider">Share:</div>
+		<button class="button button-block button-positive" ng-click="share('twitter')">
+			<i class="icon ion-social-twitter"></i> Share on Twitter
+		</button>
+		<button class="button button-block button-royal" ng-click="share('email')">
+			<i class="icon ion-email"></i> Share via Email
+		</button>
+
 		<ul class="list">
 			<li class="item">
 				<strong>Release date:</strong>

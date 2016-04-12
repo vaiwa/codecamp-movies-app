@@ -1,10 +1,12 @@
 node_modules
 bower_components
 .DS_Store
+.sass-cache/
 */.DS_store
 www/js/libs.js
 www/fonts/*
 www/css/*
 www/build/*
 platforms/
-plugins/*
+plugins/
+docs/
