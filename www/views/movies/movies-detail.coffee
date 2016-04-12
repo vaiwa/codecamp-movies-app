@@ -6,7 +6,7 @@ app.controller 'MoviesDetailCtrl', ($scope, MoviesService, $stateParams) ->
 		MoviesService.getMovieInfo movieId, (err, res) ->
 			$scope.countries = res.production_countries
 
-			google.charts.load 'current', 'packages': ['geomap']
+			google.charts.load 'current', 'packages': ['geochart']
 			google.charts.setOnLoadCallback ->
 				countries = [ ['Country', 'Popularity'] ]
 				countries.push [country.iso_3166_1, 500] for country in $scope.countries
@@ -15,11 +15,12 @@ app.controller 'MoviesDetailCtrl', ($scope, MoviesService, $stateParams) ->
 				options = dataMode: 'regions'
 
 				container = document.getElementById 'regions_div'
-				geomap = new google.visualization.GeoMap container
+				geochart = new google.visualization.GeoChart container
 
-				geomap.draw data, options
+				geochart.draw data, options
 
 		$scope.$on '$ionicView.enter', -> ga_storage._trackPageview '/movies/:movieId', 'Detail'
+
 
 	$scope.isMovieWatched = -> MoviesService.isMovieWatched(movieId)
 	$scope.toggleWatched = -> MoviesService.toggleWatched(movieId)
