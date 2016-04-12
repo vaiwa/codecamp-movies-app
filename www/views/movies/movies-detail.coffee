@@ -1,7 +1,10 @@
 app.controller 'MoviesDetailCtrl', ($scope, MoviesService, $stateParams) ->
 	if $stateParams.id
 		movieId = +$stateParams.id
-		$scope.movie = MoviesService.getMovieById movieId
+
+		MoviesService.getMovies ->
+			$scope.movie = MoviesService.getMovieById movieId
+
 		MoviesService.getMovieCredits movieId, (err, res) -> $scope.credits = res
 		MoviesService.getMovieInfo movieId, (err, res) ->
 			$scope.countries = res.production_countries

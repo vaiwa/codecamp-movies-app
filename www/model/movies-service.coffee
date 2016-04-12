@@ -4,8 +4,8 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 	service.page = 1
 	service.watchedMovies = []
 
-	service.getMovies = (page, cb) ->
-		url = APP_CONFIG.getApiUrl 'moviesPopular', {page}
+	service.getMovies = (cb) ->
+		url = APP_CONFIG.getApiUrl 'moviesPopular', page: service.page
 		$resource url, {}, query: isArray: no
 		.query (res) ->
 			service.data.movies ?= []
@@ -46,7 +46,7 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 
 	service.loadMore = (cb) ->
 		service.page += 1
-		service.getMovies service.page, ->
+		service.getMovies ->
 			service.getWatchedMoviesFromStorage()
 			cb()
 
@@ -55,5 +55,5 @@ app.factory 'MoviesService', ($resource, APP_CONFIG) ->
 			service.data.movies.splice index, 1 if movie.id is id
 
 
-	service.getMovies service.page, -> service.getWatchedMoviesFromStorage()
+	service.getMovies -> service.getWatchedMoviesFromStorage()
 	service
