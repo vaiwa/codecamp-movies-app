@@ -25,8 +25,8 @@ app.controller 'MoviesDetailCtrl', ($scope, MoviesService, GlobalService, Contac
 
 		$scope.$on '$ionicView.enter', -> ga_storage._trackPageview '/movies/:movieId', 'Detail'
 
-	$ionicModal.fromTemplateUrl 'views/movies/contacts-modal.html', scope: $scope, animation: 'slide-in-up'
-	.then (modal) -> $scope.addMovieModal = modal
+	$ionicModal.fromTemplateUrl 'views/contacts/contacts-modal.html', scope: $scope, animation: 'slide-in-up'
+	.then (modal) -> $scope.contactsModal = modal
 
 	$scope.share = (type) ->
 		switch type
@@ -39,7 +39,7 @@ app.controller 'MoviesDetailCtrl', ($scope, MoviesService, GlobalService, Contac
 				ContactsService.getContacts().then (contacts) ->
 					console.log 'contacts', contacts
 					$scope.contacts = contacts
-					$scope.contactModal.show()
+					$scope.contactsModal.show()
 					GlobalService.loadingHide()
 
 			else console.warn 'WrongType'

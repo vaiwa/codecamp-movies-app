@@ -3,7 +3,7 @@ app.factory 'ContactsService', ($resource, APP_CONFIG, $q) ->
 	service.data = {}
 
 	service.filterContacts = (contacts) ->
-		ilteredContacts = []
+		filteredContacts = []
 		filteredContacts.push contact for contact in contacts when contact?.name?.familyName and contact?.name?.givenName and contact?.emails?.length
 		filteredContacts
 
@@ -17,7 +17,8 @@ app.factory 'ContactsService', ($resource, APP_CONFIG, $q) ->
 			navigator.contacts.fieldType.emails
 		]
 		promise = $q.defer()
-		navigator.contacts.find ['*'], (contacts) ->
+		navigator.contacts.find ['*']
+		, (contacts) ->
 			promise.resolve service.filterContacts contacts
 		, (e) ->
 			console.error 'error', e
